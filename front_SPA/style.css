@@ -220,7 +220,6 @@ text-align: center;
 .first-line div{
   padding: 1rem;
   border: black 2px solid;
-
 }
 
 .sd-line{
@@ -251,8 +250,6 @@ text-align: center;
   display: flex;
   height: 2rem;
   border: #111111 solid 2px;
-  /* align-items: center; */
-  /* text-align: center; */
 }
 .montant-libre input{
   text-align: center;
@@ -274,8 +271,91 @@ text-align: center;
   border-left: #111111 solid 2px;
 }
 
+/* -----------------------Inscription form-------------------------------------- */
+.wallpaper{
+  width: 100%;
+  height: 100%;
+  background: url('assets/oiseau2.webp');
+  background-size: cover;
+  padding-top: 4rem;
+}
+.container-form{
+	border: black 3px solid;
+	width: 30rem;
+	padding: 3rem;
+  margin: 3rem auto;
+  padding-top: 3rem;
+}
+
+h1{
+	margin-bottom:  2rem;
+	text-align: center;
+  color: black;
+}
+
+
+.form-submit{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+input{
+	color: black;
+	display: block;
+	width: 30rem;
+	height: 2rem;
+	margin: 1.3rem 0;
+	font-size: large;
+	font-weight: 700;
+  color: black;
+  background-color: white;
+  border: #111111 solid;
+}
+
+.checkbox{
+	display: flex;
+	align-items: center;
+	/* padding-left: 2rem ; */
+}
+
+.checkbox input{
+	width: 2rem;
+	/* height: 2rem; */
+	margin-right: 3rem;
+}
+
+.checkbox p{
+	font-size: large;
+	font-weight: 700;
+}
+
+input[type=submit] {
+	width: 10rem;
+	border: 2px solid white;
+	color: white;
+	background-color: black;
+	height: 4rem;
+	margin: 2rem auto;
+  cursor: pointer;
+}
+.mdpEtsignUp{
+  display: flex;
+  justify-content: space-between;
+}
+.mdpEtsignUp a{
+  text-decoration: none;
+  color: white;
+}
+.fullName{
+  display: flex;
+  flex-direction: row;
+  /* margin: 1.3rem 0; */
+  
+}
+
 /*------------Cordoonnees----------- */
-.mes-coordonnees{
+/* .mes-coordonnees{
   border: black solid 2px;
   width: 25%;
   margin:auto;
@@ -287,15 +367,9 @@ text-align: center;
 .mes-coordonnees input{
   height: 1.5rem;
   text-align: center;
-  /* margin-left: 10%;
-  margin-right: 10%; */
   margin-bottom: 1.5rem;
   border: #111111 solid 2px;
-  /* padding: 1px 2px; */
 }
-/* .mes-coordonnees div{
-  width: 100%;
-} */
 .mes-coordonnees form{
 margin-bottom: 1.5rem;
 margin-top: 1.5rem;
@@ -303,7 +377,6 @@ margin-top: 1.5rem;
 .email input, .adresse input, .pays input{
   width: 80%;
   text-align: center;
-  /* margin: 0 1.5rem ; */
   margin-left: 10%;
 }
 .fullName{
@@ -329,44 +402,4 @@ height: 1.5rem;
   display: flex;
   margin: 0 20%;
   justify-content: space-around;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.mon-reglement{
-  border: black solid 2px;
-  width: 25%;
-  margin:auto;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  background-color: white;
-
-}
+} */
