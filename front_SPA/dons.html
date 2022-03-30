@@ -4,14 +4,66 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
         <title>Page dons</title>
     </head>
     <body>
-        <div><p>Merci à 'Paul' pour son don de '50' euros.</p></div>
-        <div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="top-bar">
+            <p>Merci à 'Paul' pour son don de '50' euros.</p>            
+        </div>
+        <div class="bigContainer">
+            <div class="donnations">
+                <!-- <div class="montants"> -->
+                    <div class="title-don">
+                        <div><h2>Mon don</h2></div>
+                    </div>
+                    <div class="allprice">
+                        <div class="first-line">
+                            <a href="#"><div>50</div></a>
+                            <a href="#"><div>80</div></a>
+                            <a href="#"><div>100</div></a>
+                            <a href="#"><div>120</div></a>
+                        </div>
+                        <div class="sd-line">
+                            <a href="#"><div>150</div></a>
+                            <a href="#"><div>300</div></a>
+                            <a href="#"><div>500</div></a>
+                            <a href="#"><div>1000</div></a>
+                        </div>    
+                    </div>
+                    <div class="montant-libre">
+                        <input type="text" placeholder="Montant libre">
+                        <div><p>€</p></div>   
+                    </div>
+                <!-- </div> -->
+            </div>
+            <div class="mes-coordonnees">
+                <div class="title-don">
+                    <div>
+                        <h2>Mes coordonnées</h2>
+                    </div>
+                </div>
+                <form action="submit">
+                    <!-- <div><input type="email"></div> -->
+                    <div class="email"><input type="email" placeholder="email"></div>
+                    <div class="civilite">
+                        <div>Civilité</div>
+                        <div>                       
+                             <select>
+                            <option value="M">M</option>
+                            <option value="Mme">Mme</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="fullName">
+                        <input type="text" name="prenom" placeholder="prenom" class="prenom">
+                        <input type="text" name="nom" placeholder="nom" class="nom">
+                    </div>
+                    <div class="adresse"><input type="text" name="adresse" placeholder="adresse"></div>
+                    <div class="pays"><input type="Pays" name="Pays" value="France"></div> 
+                    <input type="submit" value="Je donne">
+                </form>
+            </div>
         </div>
     </body>
 </html>
