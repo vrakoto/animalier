@@ -20,7 +20,10 @@
 
         <div class="links">
             <div><a href="index.php?page=accueil">Accueil</a></div>
+            <div><a href="index.php?page=produits">Produits</a></div>
             <?php if ($connecte): ?>
+                <div><a href="index.php?page=gestionAnimaux">Gestion animaux</a></div>
+                <div><a href="index.php?page=gestionProduits">Gestion produits</a></div>
                 <div><a href="index.php?page=deconnexion">Déconnexion</a></div>
             <?php else: ?>
                 <div><a href="index.php?page=connexion">Connexion</a></div>

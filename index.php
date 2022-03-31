@@ -26,7 +26,8 @@ switch ($page) {
     case 'accueil':
         $totalDons = $pdo->getTotalDons();
         $unit = 1;
-        $lesAnimaux = $pdo->getLesAnimaux();
+        $lesAnimauxCarroussel = $pdo->getLesAnimaux(10);
+        $lesAnimaux30DerniersJours = $pdo->getLesAnimaux(30);
 
         if (isset($_POST['montant']) && !empty($_POST['montant'])) {
             $montant = (float)$_POST['montant'];

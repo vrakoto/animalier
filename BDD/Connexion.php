@@ -31,9 +31,12 @@ class Connexion {
      * 
      * @return array
      */
-    function getLesAnimaux(): array
+    function getLesAnimaux(int $limit = NULL): array
     {
         $req = "SELECT * FROM animal ORDER BY id DESC";
+        if ($limit != NULL) {
+            $req .= " LIMIT " . $limit;
+        }
         $p = $this->pdo->query($req);
 
         return $p->fetchAll();

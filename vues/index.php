@@ -1,5 +1,4 @@
 <div class='container'>
-    <h2><?php var_dump($connecte === TRUE) ?></h2>
     <h2>Aidez-nous à leur offrir une nouvelle vie</h2>
     <div class="totalDons"><?= $totalDons ?> € de dons récoltés.</div>
 
@@ -7,17 +6,17 @@
         <div class="title-don">Mon Don</div>
         <div class="allprice">
             <div class="first-line">
-                <div>50</div>
-                <div>80</div>
-                <div>100</div>
-                <div>120</div>
+                <div class="price">50</div>
+                <div class="price">80</div>
+                <div class="price">100</div>
+                <div class="price">120</div>
             </div>
 
             <div class="sd-line">
-                <div>150</div>
-                <div>300</div>
-                <div>500</div>
-                <div>1000</div>
+                <div class="price">150</div>
+                <div class="price">300</div>
+                <div class="price">500</div>
+                <div class="price">1000</div>
             </div>
         </div>
 
@@ -28,10 +27,10 @@
         <button type="submit" class="btnDon">Donner</button>
     </form>
     <div class="slide-container">
-        <?php foreach ($lesAnimaux as $animal) : ?>
+        <?php foreach ($lesAnimauxCarroussel as $animal) : ?>
             <a href="index.php?page=consulterAnimal&id=<?= (int)$animal['id'] ?>" class="custom-slider fade">
-                <div class="slide-index"><?= $unit++ ?> / <?= count($lesAnimaux) ?></div>
-                <img class="slide-img" src="data:image/jpeg;base64,<?= base64_encode($animal['photo']) ?>" />
+                <div class="slide-index"><?= $unit++ ?> / <?= count($lesAnimauxCarroussel) ?></div>
+                <img class="slide-img" src="<?= htmlentities($animal['photo']) ?>" />
                 <div class="slide-text">Nom : <?= htmlentities($animal['nom']) ?> | Race : <?= htmlentities($animal['race']) ?> | Age : <?= (int)$animal['age'] ?></div>
             </a>
         <?php endforeach ?>
@@ -47,6 +46,46 @@
             <span class="dot" onclick="currentSlide(<?= $i ?>)"></span>
         <?php endfor ?>
     </div>
+
+    <hr>
+
+    <br>
+    <br>
+    <h3>Les nouveaux venus de ces 30 derniers jours !</h3>
+    <table class="rwd-table">
+        <tbody>
+            <tr>
+                <th>Photo</th>
+                <th>Nom</th>
+                <th>Age</th>
+                <th>Race</th>
+                <th>Intéraction</th>
+            </tr>
+            <?php foreach ($lesAnimaux30DerniersJours as $animal): ?>
+                <tr class="laLigneAnimal">
+                    <td data-th="Photo">
+                        <img height="100" width="100" alt="Image de l'animal en grand" src="<?= htmlspecialchars($animal['photo']) ?>">
+                    </td>
+                    <td data-th="Nom">
+                        <?= htmlentities($animal['nom']) ?>
+                    </td>
+                    <td data-th="Age">
+                        <?= (int)$animal['age'] ?>
+                    </td>
+                    <td data-th="Race">
+                        <?= htmlentities($animal['race']) ?>
+                    </td>
+                    <td data-th="Intéraction">
+                        <a href="index.php?page=consulterAnimal&id=<?= (int)$animal['id'] ?>" class="btnDon see"><i class="fa-solid fa-eye"></i></a>
+                        <?php if ($connecte): ?>
+                            <a href="index.php?page=modifierAnimal&id=<?= (int)$animal['id'] ?>" class="btnDon edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="index.php?page=supprimerAnimal&id=<?= (int)$animal['id'] ?>" class="btnDon delete"><i class="fa-solid fa-trash"></i></a>
+                        <?php endif ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
 </div>
 
 <script>

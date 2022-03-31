@@ -1,7 +1,15 @@
 <div class="container">
     <?php if (!isset($erreur)) : ?>
         <h1>Fiche Animal</h1>
-        <img class="ficheImg" alt="Image de l'animal en grand" src="data:image/jpeg;base64,<?= base64_encode($img) ?>">
+
+        <?php if ($connecte): ?>
+            <br>
+            <a class="btnDon" href="index.php?page=lesDemandes&id=<?= $id ?>">Consulter les demandes</a>
+        <?php endif ?>
+
+        <div>
+            <img class="ficheImg" alt="Image de l'animal en grand" src="<?= htmlentities($img) ?>">
+        </div>
 
         <h2>Informations</h2>
 
