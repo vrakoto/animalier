@@ -16,13 +16,14 @@
 
 <body>
     <div class="navbar">
-        <a class="logo"><img src="front_SPA/assets/logo.png" height="60px"></a>
+        <a class="logo"><img src="vues/assets/logo.png" height="60px"></a>
 
         <div class="links">
             <div><a href="index.php?page=accueil">Accueil</a></div>
-            <div><a href="index.php?page=aPropos">A propos</a></div>
-            <div><a href="index.php?page=jardon">Jardin</a></div>
-            <div><a href="index.php?page=procedures">Procédures</a></div>
-            <div><a href="index.php?page=connexion">Connexion</a></div>
+            <?php if ($connecte): ?>
+                <div><a href="index.php?page=deconnexion">Déconnexion</a></div>
+            <?php else: ?>
+                <div><a href="index.php?page=connexion">Connexion</a></div>
+            <?php endif ?>
         </div>
     </div>

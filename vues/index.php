@@ -1,4 +1,5 @@
 <div class='container'>
+    <h2><?php var_dump($connecte === TRUE) ?></h2>
     <h2>Aidez-nous à leur offrir une nouvelle vie</h2>
     <div class="totalDons"><?= $totalDons ?> € de dons récoltés.</div>
 

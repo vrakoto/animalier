@@ -1,7 +1,10 @@
 <?php
-require_once 'BDD/Connexion.php';
+session_start();
+use App\Connexion;
+
+require_once 'vendor/autoload.php';
 $root = __DIR__ . DIRECTORY_SEPARATOR;
-$template = $root . 'front_SPA' . DIRECTORY_SEPARATOR;
+$template = $root . 'vues' . DIRECTORY_SEPARATOR;
 $elements = $root . 'elements' . DIRECTORY_SEPARATOR;
 
 $pdo = new Connexion;
@@ -52,37 +55,41 @@ switch ($page) {
             $erreur = 'Animal introuvable';
         }
 
-        echo "ok";
-        echo '<br>';
-        echo "ok";
-        echo '<br>';
-        echo "ok";
-        echo '<br>';
-        echo "ok";
-        echo '<br>';
-        echo "ok";
-        echo '<br>';
-        echo "ok";
-        echo '<br>';
-        if ($connecte && isset($_REQUEST['adopter'])) {
-            $infos = $idAnimal;
-            if (!empty($_POST['nom']) && !empty($_POST['prenom'])) {
-                $nom = htmlentities($_POST['nom']);
-                $prenom = htmlentities($_POST['prenom']);
-                $infos = ['nom' => $nom, 'prenom' => $prenom];
+        if (isset($_REQUEST['demandeAdoption']) && !empty($_POST['nom']) && !empty($_POST['prenom'])) {
+            $nom = htmlentities($_POST['nom']);
+            $prenom = htmlentities($_POST['prenom']);
+            $motivation = htmlentities($_POST['motivation']);
+            try {
+                $pdo->demanderAdoption($id, $nom, $prenom, $motivation);
+                header("Location:index.php?page=consulterAnimal&id=" . $id);
+                exit();
+            } catch (\Throwable $th) {
+                $erreur = 'Demande impossible pour le moment';
             }
-            $pdo->adopterAnimal($infos);
         }
 
         require_once $template . 'consulterAnimal.php';
     break;
 
     case 'connexion':
+        if (isset($_POST['mail'], $_POST['mdp'])) {
+            $mail = htmlentities($_POST['mail']);
+            $mdp = htmlentities($_POST['mdp']);
+
+            if ($pdo->authValid($mail, $mdp)) {
+                $_SESSION['id'] = $mail;
+                header('Location:index.php?page=accueil');
+                exit();
+            } else {
+                $erreur = 'Authentification incorrecte';
+            }
+        }
+
         require_once $template . 'connexion.php';
     break;
+}
 
-    default:
-        require_once $template . 'erreur.php';
-    break;
+if ($connecte) {
+    require_once 'Admin/index.php';
 }
 require_once 'elements/footer.php';

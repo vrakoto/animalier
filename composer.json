@@ -1,0 +1,16 @@
+{
+    "name": "carel/animalier",
+    "description": "projet php en groupe",
+    "autoload": {
+        "psr-4": {
+            "App\\": "BDD/"
+        }
+    },
+    "authors": [
+        {
+            "name": "carellien",
+            "email": "carellien.rakotoarisoa@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,7 +1,9 @@
 <?php
+namespace App;
+use PDO;
 
 class Connexion {
-    private PDO $pdo;
+    protected PDO $pdo;
 
     function __construct()
     {
@@ -22,15 +24,6 @@ class Connexion {
         }
 
         return $total;
-    }
-
-    function faireDon(float $montant): bool
-    {
-        $req = "INSERT INTO dons (montant) VALUES (:montant)";
-        $p = $this->pdo->prepare($req);
-        return $p->execute([
-            'montant' => $montant
-        ]);
     }
 
     /**
@@ -60,20 +53,37 @@ class Connexion {
         return $p->fetch();
     }
 
-    function adopterAnimal(string|array $infos)
+    function faireDon(float $montant): bool
     {
-        if (is_array($infos)) {
-            foreach ($infos as $key => $info) {
-                $req = "INSERT INTO animal_adopte (idAnimal, idUtilisateur) VALUES (:idAnimal, idUtilisateur)";
-            }
-        }
-        /* $req = "INSERT INTO animal_adopte (idAnimal, idUtilisateur) VALUES (:idAnimal, idUtilisateur)";
+        $req = "INSERT INTO dons (montant) VALUES (:montant)";
+        $p = $this->pdo->prepare($req);
+        return $p->execute([
+            'montant' => $montant
+        ]);
+    }
+
+    function demanderAdoption(string $idAnimal, string $nom, string $prenom, string $motivation): bool
+    {
+        $req = "INSERT INTO demandes (idAnimal, nom, prenom, motivation) VALUES (:idAnimal, :nom, :prenom, :motivation)";
         $p = $this->pdo->prepare($req);
         return $p->execute([
             'idAnimal' => $idAnimal,
             'nom' => $nom,
-            'prenom' => $prenom
-        ]); */
+            'prenom' => $prenom,
+            'motivation' => $motivation
+        ]);
     }
 
+    function authValid(string $mail, string $mdp): bool
+    {
+        $req = "SELECT mail, mdp FROM admin
+                WHERE mail = :mail AND mdp = :mdp";
+        $p = $this->pdo->prepare($req);
+        $p->execute([
+            'mail' => $mail,
+            'mdp' => $mdp
+        ]);
+
+        return !empty($p->fetchAll());
+    }
 }

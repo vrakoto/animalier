@@ -5,7 +5,7 @@
 }
 
 body {
-  background: url('../front_SPA/assets/banner.jpeg') no-repeat center center fixed; 
+  background: url('../vues/assets/banner.jpeg') no-repeat center center fixed; 
   background-size: cover;
 }
 
@@ -252,8 +252,6 @@ body {
 }
 
 .btnDon {
-  width: 8rem;
-  height: 3rem;
   margin: 1rem auto 2rem auto;
   cursor: pointer;
   background-color: black;
@@ -263,6 +261,7 @@ body {
   transition: .2s ease-in-out;
   outline: none;
   border: none;
+  padding: 1rem;
 }
 
 .btnDon:hover {
@@ -312,4 +311,41 @@ body {
 .ficheRenseignements input {
     outline: none;
     margin-top: .5rem;
+}
+
+
+
+
+/* -------------------------------------------------- Connexion Forms ------------------------------------------ */
+.wallpaper{
+  margin-top: 10rem;
+  text-align: center;
+}
+
+.container-form{
+  border: black 3px solid;
+  width: 30rem;
+  padding: 3rem;
+  margin: 3rem auto;
+  padding-top: 3rem;
+  background-color: #FFF;
+}
+
+.wallpaper h1{
+  margin-bottom:  2rem;
+  color: black;
+}
+
+.wallpaper input{
+  color: black;
+  display: block;
+  width: 30rem;
+  height: 2rem;
+  margin: 1.3rem 0;
+  font-size: large;
+  font-weight: 700;
+  color: black;
+  outline: none;
+  border: #111111 solid;
+  background-color: white;
 }
