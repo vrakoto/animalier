@@ -21,7 +21,7 @@
             <input type="text" name="nom" id="nom">
 
             <label for="age">Son age</label>
-            <input type="text" name="age" id="age">
+            <input type="number" name="age">
             
             <label for="race">Sa race</label>
             <input type="text" name="race" id="race">

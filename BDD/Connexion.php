@@ -13,6 +13,17 @@ class Connexion {
         ]);
     }
 
+    function getErreursForms(array $forms): array
+    {
+        $erreurs = [];
+        foreach ($forms as $input => $val) {
+            if (empty(trim($val))) {
+                $erreurs = [$input];
+            }
+        }
+        return $erreurs;
+    }
+
     function getTotalDons(): float
     {
         $req = "SELECT montant FROM dons";
@@ -65,13 +76,14 @@ class Connexion {
         ]);
     }
 
-    function demanderAdoption(string $idAnimal, string $nom, string $prenom, string $motivation): bool
+    function demanderAdoption(string $idAnimal, string $nom, string $prenom, string $mail, string $motivation): bool
     {
-        $req = "INSERT INTO demandes (idAnimal, nom, prenom, motivation) VALUES (:idAnimal, :nom, :prenom, :motivation)";
+        $req = "INSERT INTO demandes (idAnimal, nom, prenom, mail, motivation) VALUES (:idAnimal, :nom, :prenom, :mail, :motivation)";
         $p = $this->pdo->prepare($req);
         return $p->execute([
             'idAnimal' => $idAnimal,
             'nom' => $nom,
+            'mail' => $mail,
             'prenom' => $prenom,
             'motivation' => $motivation
         ]);
@@ -88,5 +100,23 @@ class Connexion {
         ]);
 
         return !empty($p->fetchAll());
+    }
+
+
+    function getLeProduit(int $idProduit): array
+    {
+        $req = "SELECT * FROM produits WHERE id = :id";
+        $p = $this->pdo->prepare($req);
+        $p->execute(['id' => $idProduit]);
+
+        return $p->fetch();
+    }
+
+    function getLesProduits(): array
+    {
+        $req = "SELECT * FROM produits ORDER BY dateAjout DESC";
+        $p = $this->pdo->query($req);
+        
+        return $p->fetchAll();
     }
 }

@@ -34,7 +34,7 @@ switch ($page) {
         }
 
         if (isset($_POST)) {
-            $lesErreurs = $admin->getErreursForms($_POST);
+            $lesErreurs = $pdo->getErreursForms($_POST);
             if (empty($lesErreurs)) {
                 try {
                     $admin->modifierAnimal($idAnimal, $_POST);
@@ -61,15 +61,18 @@ switch ($page) {
 
     case 'ajouterAnimal':
         if (isset($_POST)) {
-            $lesErreurs = $admin->getErreursForms($_POST);
+            $lesErreurs = $pdo->getErreursForms($_POST);
             if (empty($lesErreurs)) {
                 try {
                     $admin->ajouterAnimal($_POST);
                     header("Location:index.php?page=gestionAnimaux");
                     exit();
                 } catch (\Throwable $th) {
-                    $erreur = 'Ajout impossible';
+                    $msg = 'Ajout impossible';
                 }
+            } else {
+                $style = "erreur";
+                $msg = "Le formulaire est invalide, des champs sont vides";
             }
         }
         require_once $adminTemplates . 'ajouterAnimal.php';
@@ -78,24 +81,67 @@ switch ($page) {
 
 
     case 'gestionProduits':
-        $lesProduits = $admin->getLesProduits();
+        $lesProduits = $pdo->getLesProduits();
         require_once $adminTemplates . 'gestionProduits.php';
     break;
 
     case 'ajouterProduit':
-        if (isset($_POST)) {
-            $lesErreurs = $admin->getErreursForms($_POST);
+        if (!empty($_POST)) {
+            $lesErreurs = $pdo->getErreursForms($_POST);
             if (empty($lesErreurs)) {
                 try {
                     $admin->ajouterProduit($_POST);
                     header("Location:index.php?page=gestionProduits");
                     exit();
                 } catch (\Throwable $th) {
-                    $erreur = 'Ajout impossible';
+                    $style = 'erreur';
+                    $msg = 'Ajout impossible';
                 }
+            } else {
+                $style = 'erreur';
+                $msg = 'Des champs sont vides';
             }
         }
         require_once $adminTemplates . 'ajouterProduit.php';
+    break;
+
+    case 'modifierProduit':
+        $idProduit = (int)$_REQUEST['id'];
+        try {
+            $leProduit = $pdo->getLeProduit($idProduit);
+            $lienImg = htmlentities($leProduit['img']);
+            $nom = htmlentities($leProduit['nom']);
+            $prixUnit = (float)$leProduit['prixUnit'];
+            $quantite = (int)$leProduit['quantite'];
+            $description = htmlentities($leProduit['descriptions']);
+        } catch (\Throwable $th) {
+            $erreur = 'Produit introuvable';
+        }
+
+        if (!empty($_POST)) {
+            $lesErreurs = $pdo->getErreursForms($_POST);
+            if (empty($lesErreurs)) {
+                try {
+                    $admin->modifierProduit($idProduit, $_POST);
+                    header("Refresh:0");
+                    exit();
+                } catch (\Throwable $th) {
+                    $erreur = 'Modification impossible';
+                }
+            }
+        }
+        require_once $adminTemplates . 'modifierProduit.php';
+    break;
+
+    case 'supprimerProduit':
+        $idProduit = (int)$_REQUEST['id'];
+        try {
+            $admin->supprimerProduit($idProduit);
+            header('Location:index.php?page=gestionProduits');
+            exit();
+        } catch (\Throwable $th) {
+            $erreur = "Impossible de supprimer le produit";
+        }
     break;
 
     case 'deconnexion':

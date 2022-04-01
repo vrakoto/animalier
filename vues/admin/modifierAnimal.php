@@ -16,9 +16,9 @@
             </div>
         <?php endif ?>
 
-        <form method="POST" action="index.php?page=modifierAnimal&id=<?= $idAnimal ?>">
+        <form method="POST" action="index.php?page=modifierAnimal&id=<?= $idAnimal ?>" style="margin-top: 1rem">
 
-            <label for="photo">Son nom</label>
+            <label for="photo">Sa photo (uniquement en lien URL)</label>
             <input type="text" name="photo" id="photo" value="<?= $lienImg ?>" autofocus>
 
             <label for="nom">Son nom</label>

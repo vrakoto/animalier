@@ -48,6 +48,19 @@ body {
   text-align: center;
 }
 
+.container.msg {
+  padding-top: unset;
+  color: #FFF;
+}
+
+.container.msg.erreur {
+  background-color: red;
+}
+
+.container.msg.success {
+  background-color: green;
+}
+
 .container h2 {
   font-size: xx-large;
   margin-top: 2rem;
@@ -475,4 +488,20 @@ body {
 
 .erreursModification h3 {
   color: red;
+}
+
+
+/* Produits */
+.container.produits {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.cardProduit {
+  width: 200px;
+  border: 1px solid #000;
+}
+.cardProduit img {
+  height: 150px;
+  width: 150px;
 }

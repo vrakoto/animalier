@@ -56,20 +56,35 @@ switch ($page) {
             $erreur = 'Animal introuvable';
         }
 
-        if (isset($_REQUEST['demandeAdoption']) && !empty($_POST['nom']) && !empty($_POST['prenom'])) {
-            $nom = htmlentities($_POST['nom']);
-            $prenom = htmlentities($_POST['prenom']);
-            $motivation = htmlentities($_POST['motivation']);
-            try {
-                $pdo->demanderAdoption($id, $nom, $prenom, $motivation);
-                header("Location:index.php?page=consulterAnimal&id=" . $id);
-                exit();
-            } catch (\Throwable $th) {
-                $erreur = 'Demande impossible pour le moment';
+        
+
+        if (!empty($_POST)) {
+            $lesErreurs = $pdo->getErreursForms($_POST);
+
+            // on configure une erreur par défaut qui sera ensuite changée si la procédure est bien passée.
+            $style = "erreur";
+            $msg = "Le formulaire est invalide, des champs sont vides";
+            //
+            if (empty($lesErreurs)) {
+                try {
+                    $nom = htmlentities($_POST['nom']);
+                    $prenom = htmlentities($_POST['prenom']);
+                    $mail = htmlentities($_POST['mail']);
+                    $motivation = htmlentities($_POST['motivation']);
+                    $pdo->demanderAdoption($id, $nom, $prenom, $mail, $motivation);
+                    $style = "success";
+                    $msg = "Demande d'adoption envoyée.";
+                } catch (\Throwable $th) {
+                    $msg = "Demande d'adoption impossible";
+                }
             }
         }
-
         require_once $template . 'consulterAnimal.php';
+    break;
+
+    case 'nosProduits':
+        $lesProduits = $pdo->getLesProduits();
+        require_once $template . 'nosProduits.php';
     break;
 
     case 'connexion':
