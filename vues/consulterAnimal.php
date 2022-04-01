@@ -23,6 +23,7 @@
         <div class="leInfo">Age : <?= $age ?></div>
         <div class="leInfo">Race : <?= $race ?></div>
         <div class="leInfo">Description : <?= $description ?></div>
+        <div class="leInfo">Date d'ajout : <?= $dateAjout ?></div>
     </div>
 
     <button class="btnDon" onclick="afficherRenseignementAdoption()">Demande d'adoption</button>

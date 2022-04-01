@@ -59,6 +59,7 @@
                 <th>Nom</th>
                 <th>Age</th>
                 <th>Race</th>
+                <th>Date d'ajout</th>
                 <th>Intéraction</th>
             </tr>
             <?php foreach ($lesAnimaux30DerniersJours as $animal): ?>
@@ -74,6 +75,9 @@
                     </td>
                     <td data-th="Race">
                         <?= htmlentities($animal['race']) ?>
+                    </td>
+                    <td data-th="Date d'ajout">
+                        <?= $pdo::convertDate($animal['dateAjout']) ?>
                     </td>
                     <td data-th="Intéraction">
                         <a href="index.php?page=consulterAnimal&id=<?= (int)$animal['id'] ?>" class="btnDon see"><i class="fa-solid fa-eye"></i></a>

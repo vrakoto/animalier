@@ -27,7 +27,7 @@ switch ($page) {
         $totalDons = $pdo->getTotalDons();
         $unit = 1;
         $lesAnimauxCarroussel = $pdo->getLesAnimaux(10);
-        $lesAnimaux30DerniersJours = $pdo->getLesAnimaux(30);
+        $lesAnimaux30DerniersJours = $pdo->last30DaysAnimaux();
 
         if (isset($_POST['montant']) && !empty($_POST['montant'])) {
             $montant = (float)$_POST['montant'];
@@ -52,6 +52,7 @@ switch ($page) {
             $age = (int)$leAnimal['age'];
             $race = htmlentities($leAnimal['race']);
             $description = htmlentities($leAnimal['description']);
+            $dateAjout = $pdo::convertDate($leAnimal['dateAjout']);
         } catch (\Throwable $th) {
             $erreur = 'Animal introuvable';
         }

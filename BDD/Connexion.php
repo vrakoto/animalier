@@ -1,5 +1,7 @@
 <?php
 namespace App;
+
+use DateTime;
 use PDO;
 
 class Connexion {
@@ -42,7 +44,7 @@ class Connexion {
      * 
      * @return array
      */
-    function getLesAnimaux(int $limit = NULL): array
+    function getLesAnimaux(int $limit = NULL)
     {
         $req = "SELECT * FROM animal ORDER BY id DESC";
         if ($limit != NULL) {
@@ -65,6 +67,14 @@ class Connexion {
         $p->execute(['id' => $idAnimal]);
 
         return $p->fetch();
+    }
+
+    function last30DaysAnimaux(): array
+    {
+        $req = "SELECT * FROM animal WHERE dateAjout >= DATE_ADD(CURDATE(), INTERVAL -30 DAY)";
+        $lesAnimaux = $this->pdo->query($req);
+
+        return $lesAnimaux->fetchAll();
     }
 
     function faireDon(float $montant): bool
@@ -118,5 +128,11 @@ class Connexion {
         $p = $this->pdo->query($req);
         
         return $p->fetchAll();
+    }
+
+    static function convertDate(string $date): string
+    {
+        $date = new DateTime($date);
+        return $date->format('d/m/Y');
     }
 }
